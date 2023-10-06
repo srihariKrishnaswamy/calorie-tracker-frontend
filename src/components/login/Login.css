@@ -1,0 +1,81 @@
+/* Login.css */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .login-box {
+    background-color: black;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .login-box h2 {
+    color: white;
+    font-size: 36px; /* Increase font size for the heading */
+  }
+  
+  .login-form {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 28px; /* Increase font size for form elements */
+  }
+  
+  .login-form label {
+    color: white;
+    font-size: 24px; /* Increase font size for labels */
+    margin-bottom: 20px; /* Increase spacing between labels and inputs */
+  }
+  
+/* Style the input fields */
+.login-form input {
+    font-size: 24px; /* Increase font size for inputs */
+    padding: 15px; /* Increase padding for inputs */
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px;
+    width: 100%; /* Make the input fields full width */
+  }
+  
+  .login-form button {
+    font-size: 28px; /* Increase font size for buttons */
+    margin-top: 20px; /* Increase spacing between buttons and inputs */
+  }
+  
+  .field-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 20px; /* Increase spacing between fields */
+  }
+  
+  .login-button {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 60px; /* Increase line height for buttons */
+    width: 200px; /* Increase width for buttons */
+    height: 60px; /* Increase height for buttons */
+    background-color: white;
+    color: black;
+    font-size: 28px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .login-button:hover {
+    background-color: grey;
+    color: black;
+  }
+  

@@ -1,20 +1,100 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { Fragment, useEffect, useState, useRef } from "react";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Login from "./components/login/Login";
 import Signup from "./components/signup/Signup";
+import UserDashboard from './components/userdashboard/UserDashboard';
+import Navsection from './components/navsection/Navsection';
+
+const API_URL = "https://caltracker-backend-988509e33b53.herokuapp.com";
 function App() {
+  const [isSignedIn, setIsSignedIn] = useState(false)
+  const [user, setUser] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    user_id: null,
+    sex: "",
+    weight: null,
+    height: null,
+    target_calories: null,
+    timezone: "",
+    pinned_user_1_id: null,
+    pinned_user_2_id: null,
+    pinned_user_3_id: null,
+    pinned_user_4_id: null,
+    pinned_user_5_id: null
+  });
+
+  const loadUser = (newUser) => { // this method will get called when the user successfully signs in
+    const userObj = {
+      first_name: newUser.first_name,
+      last_name: newUser.last_name,
+      email: newUser.email,
+      password: newUser.password,
+      user_id: newUser.user_id,
+      sex: newUser.sex,
+      weight: newUser.weight,
+      height: newUser.height,
+      target_calories: newUser.target_calories,
+      timezone: newUser.timezone,
+      pinned_user_1_id: newUser.pinned_user_1_id,
+      pinned_user_2_id: newUser.pinned_user_2_id,
+      pinned_user_3_id: newUser.pinned_user_3_id,
+      pinned_user_4_id: newUser.pinned_user_4_id,
+      pinned_user_5_id: newUser.pinned_user_5_id
+    };
+    setUser(userObj);
+    setIsSignedIn(true); 
+    localStorage.setItem("user", JSON.stringify(userObj));
+    console.log(userObj)
+  };
+  const signOut = async () => {
+    var token = localStorage.getItem('access_token')
+    localStorage.clear();
+    const response = await fetch(`${API_URL}/auth/logout`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      credentials: "include",
+    });
+    if (!response.ok) {
+        console.log("failed the logout serverside", response.statusText);
+    }
+    setUser({
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: "",
+      user_id: null,
+      sex: "",
+      weight: null,
+      height: null,
+      target_calories: null,
+      timezone: "",
+      pinned_user_1_id: null,
+      pinned_user_2_id: null,
+      pinned_user_3_id: null,
+      pinned_user_4_id: null,
+      pinned_user_5_id: null
+    })
+  }
+
   return (
     <div className="App">
       <Router>
         <div>
           {/* Some Nav component*/}
+          <Navsection user={user} signOut={signOut} setUser={setUser}/>
         </div>
         <Routes>
           {/* add all screens*/}
-          <Route path="/login" element={<Login />}/>
+          <Route path="/login" element={<Login loadUser={loadUser}/>}/>
           <Route path="/signup" element={<Signup />}/>
+          <Route path="/userdashboard" element={<UserDashboard />}/>
         </Routes>
       </Router>
     </div>
