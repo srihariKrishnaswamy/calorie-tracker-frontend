@@ -87,14 +87,12 @@ function App() {
     <div className="App">
       <Router>
         <div>
-          {/* Some Nav component*/}
           <Navsection user={user} signOut={signOut} setUser={setUser}/>
         </div>
         <Routes>
-          {/* add all screens*/}
           <Route path="/login" element={<Login loadUser={loadUser}/>}/>
           <Route path="/signup" element={<Signup />}/>
-          <Route path="/userdashboard" element={<UserDashboard />}/>
+          <Route path="/userdashboard" element={<UserDashboard signOut={signOut}/>}/>
         </Routes>
       </Router>
     </div>

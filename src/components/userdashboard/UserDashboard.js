@@ -1,8 +1,11 @@
 import React from 'react'
+import AddEntry from '../addentry/AddEntry'
 
-const UserDashboard = () => {
+const UserDashboard = (props) => {
   return (
-    <div>Dashboard</div>
+    <div>
+      <AddEntry signOut={props.signOut}/>
+    </div>
   )
 }
 

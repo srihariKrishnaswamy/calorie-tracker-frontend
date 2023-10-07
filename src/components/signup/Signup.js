@@ -44,7 +44,18 @@ const Signup = (props) => {
     const compEmail = formData.email.toLowerCase().trim();
     const compPW = formData.password.trim();
     var finalHeight = parseInt(formData.feet * 12) + parseInt(formData.inches);
-    console.log(finalHeight);
+    var cmHeight = 2.54 * finalHeight;
+    var kgWeight = formData.weight * 0.45359237
+    const today = new Date();
+    const year = parseInt(today.getFullYear());
+    var age = year - parseInt(formData.birth_day.slice(0, 4));
+    console.log(age);
+    var desiredCals = 0
+    if (formData.sex === 'M') {
+      desiredCals = 88.362 + (13.397 * kgWeight) + (4.799 * cmHeight) - (5.677 * age)
+    } else {
+      desiredCals = 447.593 + (9.247 * kgWeight) + (3.098 * cmHeight) - (5.330 * age)
+    }
     try {
       const res = await axios.post(API_URL + "/users", {
         email: compEmail,
@@ -57,6 +68,7 @@ const Signup = (props) => {
         height: finalHeight,
         target_calories: formData.target_calories,
         timezone: formData.timezone,
+        target_calories: desiredCals,
       });
     } catch (err) {
       console.log(err);
