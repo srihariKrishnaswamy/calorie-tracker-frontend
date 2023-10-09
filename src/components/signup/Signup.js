@@ -26,7 +26,7 @@ const Signup = (props) => {
   const [loading, setLoading] = useState(false);
 
   const onPressedLogin = (e) => {
-    navigate("/login");
+    navigate("/");
   };
 
   const handleChange = (e) => {
@@ -89,7 +89,7 @@ const Signup = (props) => {
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     });
     setLoading(false);
-    navigate("/login");
+    navigate("/");
   };
 
   return (

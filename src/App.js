@@ -6,6 +6,7 @@ import Login from "./components/login/Login";
 import Signup from "./components/signup/Signup";
 import UserDashboard from './components/userdashboard/UserDashboard';
 import Navsection from './components/navsection/Navsection';
+import jwt_decode from "jwt-decode";
 
 const API_URL = "https://caltracker-backend-988509e33b53.herokuapp.com";
 function App() {
@@ -82,6 +83,50 @@ function App() {
       pinned_user_5_id: null
     })
   }
+  const updateAccessToken = async (token) => {
+    if (token === "") {
+      return "";
+    }
+    const decodedToken = jwt_decode(token);
+    const currentTime = Date.now() / 1000;
+    if (decodedToken.exp < currentTime) {
+      const response = await fetch(`${API_URL}/auth/refresh`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        credentials: "include",
+      });
+      if (response.ok) {
+        const data = await response.json();
+        const newAccessToken = data.accessToken;
+        localStorage.setItem("access_token", newAccessToken);
+        token = newAccessToken;
+        console.log("Updated access token")
+      } else {
+        console.log("failed the refresh token stuff", response.statusText);
+        setUser({
+          first_name: "",
+          last_name: "",
+          email: "",
+          password: "",
+          user_id: null,
+          sex: "",
+          weight: null,
+          height: null,
+          target_calories: null,
+          timezone: "",
+          pinned_user_1_id: null,
+          pinned_user_2_id: null,
+          pinned_user_3_id: null,
+          pinned_user_4_id: null,
+          pinned_user_5_id: null
+        })
+        return ""
+      }
+    }
+    return token;
+  }
 
   return (
     <div className="App">
@@ -90,9 +135,9 @@ function App() {
           <Navsection user={user} signOut={signOut} setUser={setUser}/>
         </div>
         <Routes>
-          <Route path="/login" element={<Login loadUser={loadUser}/>}/>
+          <Route path="/" element={<Login loadUser={loadUser}/>}/>
           <Route path="/signup" element={<Signup />}/>
-          <Route path="/userdashboard" element={<UserDashboard signOut={signOut}/>}/>
+          <Route path="/userdashboard" element={<UserDashboard updateAccessToken={updateAccessToken} signOut={signOut}/>}/>
         </Routes>
       </Router>
     </div>

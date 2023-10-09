@@ -28,7 +28,7 @@ function Navsection(props) {
     }
   }, [props.user.first_name])
   const goLogin = () => {
-    navigate('/login');
+    navigate('/');
   }
   const goSignup = () => {
     navigate('/signup');
@@ -44,7 +44,7 @@ function Navsection(props) {
   }
   const doSO = () => {
     props.signOut();
-    navigate('/login')
+    navigate('/')
   }
   return (
     <Container className="nav">
@@ -52,7 +52,7 @@ function Navsection(props) {
       {!loggedIn ? (
         <ul className="options">
             <li>
-                <a href="/login" className="option" onClick={goLogin}>Log In</a>
+                <a href="/" className="option" onClick={goLogin}>Log In</a>
             </li>
             <li>
                 <a href="/signup" className="option" onClick={goSignup}>Sign Up</a>
@@ -70,7 +70,7 @@ function Navsection(props) {
                 <a href="/search" className="option" onClick={goSearch}>Settings</a>
             </li>
             <li>
-                <a href="/login" className="option" onClick={doSO}>Sign Out</a>
+                <a href="/" className="option" onClick={doSO}>Sign Out</a>
             </li>
         </ul>
       )}
