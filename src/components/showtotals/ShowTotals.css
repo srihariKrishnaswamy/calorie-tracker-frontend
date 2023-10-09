@@ -1,17 +1,38 @@
 .add-entry-container {
     background-color: black;
     color: white;
-    font-size: 50px; /* Adjust the font size as needed */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Set the height to 100% of the viewport height */
+    min-height: 100vh; /* Set the height to 100% of the viewport height */
     width: 100vw; /* Set the width to 100% of the viewport width */
-    font-family: "Quicksand", sans-serif;
   }
   
   .elements-container {
     display: flex;
     flex-direction: row;
+  }
+
+  .light-padding {
+    width: 5vh;
+    
+  }
+
+  .percent {
+    font-size: 50px; /* Adjust the font size as needed */
+    font-family: "Quicksand", sans-serif;
+  }
+
+  .actual-graph {
+    font-size: 20px;
+  }
+
+  @media only screen and (max-width: 1000px) {
+    .elements-container {
+      flex-direction: column;
+    }
+    .light-padding {
+      display: none;
+    }
   }

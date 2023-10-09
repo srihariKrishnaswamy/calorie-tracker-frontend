@@ -14,7 +14,7 @@ const Signup = (props) => {
     password: "",
     confirm_password: "",
     feet: 0,
-    inches: 0,
+    inches: -1,
     first_name: "",
     last_name: "",
     birth_day: "",
@@ -189,7 +189,7 @@ const Signup = (props) => {
                         onChange={handleChange}
                         required
                       >
-                        <option value={0}>Inches</option>
+                        <option value={-1}>Inches</option>
                         <option value={0}>0 in</option>
                         <option value={1}>1 in</option>
                         <option value={2}>2 in</option>

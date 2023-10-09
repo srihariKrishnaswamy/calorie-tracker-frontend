@@ -82,6 +82,7 @@ function App() {
       pinned_user_4_id: null,
       pinned_user_5_id: null
     })
+    window.location.reload(); 
   }
   const updateAccessToken = async (token) => {
     if (token === "") {
@@ -122,6 +123,7 @@ function App() {
           pinned_user_4_id: null,
           pinned_user_5_id: null
         })
+        window.location.reload(); 
         return ""
       }
     }
