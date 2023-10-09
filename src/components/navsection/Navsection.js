@@ -67,7 +67,7 @@ function Navsection(props) {
                 <a href="/settings" className="option" onClick={goSettings}>Settings</a>
             </li>
             <li>
-                <a href="/search" className="option" onClick={goSearch}>Settings</a>
+                <a href="/search" className="option" onClick={goSearch}>Search</a>
             </li>
             <li>
                 <a href="/" className="option" onClick={doSO}>Sign Out</a>
