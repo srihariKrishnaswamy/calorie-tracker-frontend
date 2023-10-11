@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Nunito:wght@200&family=Quicksand:wght@500&display=swap");
+
+.main-container {
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center;
+  align-items: center; */
+  min-height: 100vh; /* Set the height to 100% of the viewport height */
+  width: 100vw; /* Set the width to 100% of the viewport width */
+  font-family: "Quicksand", sans-serif;
+  font-size: 1.5rem;
+}
+
+.column {
+  padding: 10vh;
+  display: flex;
+  flex-direction: column; /* You can change this to 'row' if needed */
+  justify-content: center; /* Centers content horizontally */
+  align-items: center; /* Centers content vertically */
+
+}
+
+.info {
+    padding: 1vh;
+}
+
+.form-input {
+    margin: 1vh;
+    padding: 1vh;
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+@media only screen and (max-width: 800px) {
+    .main-container {
+        background-color: black;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh; /* Set the height to 100% of the viewport height */
+        width: 100vw; /* Set the width to 100% of the viewport width */
+        font-family: "Quicksand", sans-serif;
+        font-size: 1.5rem;
+      }
+  }

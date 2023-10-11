@@ -6,6 +6,7 @@ import Login from "./components/login/Login";
 import Signup from "./components/signup/Signup";
 import UserDashboard from './components/userdashboard/UserDashboard';
 import Navsection from './components/navsection/Navsection';
+import Settings from './components/settings/Settings';
 import jwt_decode from "jwt-decode";
 
 const API_URL = "https://caltracker-backend-988509e33b53.herokuapp.com";
@@ -140,6 +141,7 @@ function App() {
           <Route path="/" element={<Login loadUser={loadUser}/>}/>
           <Route path="/signup" element={<Signup />}/>
           <Route path="/userdashboard" element={<UserDashboard updateAccessToken={updateAccessToken} signOut={signOut}/>}/>
+          <Route path="/settings" element={<Settings updateAccessToken={updateAccessToken} user={user} signOut={signOut} setUser={setUser}/>}/>
         </Routes>
       </Router>
     </div>
