@@ -5,8 +5,8 @@
   color: white;
   display: flex;
   flex-direction: row;
-  /* justify-content: center;
-  align-items: center; */
+  justify-content: center;
+  align-items: center;
   min-height: 100vh; /* Set the height to 100% of the viewport height */
   width: 100vw; /* Set the width to 100% of the viewport width */
   font-family: "Quicksand", sans-serif;
@@ -14,12 +14,10 @@
 }
 
 .column {
-  padding: 10vh;
+  padding: 15vh;
   display: flex;
   flex-direction: column; /* You can change this to 'row' if needed */
   justify-content: center; /* Centers content horizontally */
-  align-items: center; /* Centers content vertically */
-
 }
 
 .info {
@@ -33,6 +31,11 @@
     color: white;
     border: 1px solid white;
     border-radius: 10px;
+}
+
+.msg {
+    font-size: 1rem;
+    color: gray;
 }
 
 @media only screen and (max-width: 800px) {
