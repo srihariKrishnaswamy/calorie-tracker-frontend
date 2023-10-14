@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Nunito:wght@200&family=Quicksand:wght@500&display=swap");
+
+.big-container {
+  background-color: black;
+  color: white;
+  font-size: 50px; /* Adjust the font size as needed */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Set the height to 100% of the viewport height */
+  width: 100vw; /* Set the width to 100% of the viewport width */
+  font-family: "Quicksand", sans-serif;
+}
+
+.entry-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    color: white;
+    font-size: 24px;
+    font-family: "Quicksand", sans-serif;
+    margin: 10vh;
+}
+/* Style for the horizontal bar */
+.horizontal-bar {
+    height: 20px; /* Adjust the height as needed */
+    width: 25%; /* Set it to approximately 1/4 of the screen width */
+    background-color: white; /* Set the background color */
+    margin: 0 auto; /* Center horizontally */
+  }
+
+  .bar-div {
+    padding-top: 40vh;
+  }
+
+  .add-input {
+    font-family: "Quicksand", sans-serif;
+    background-color: black;
+    color: white;
+    outline: 2px solid white;
+    margin: 2vh;
+    border-radius: 10px;
+    height: 40px; /* Adjust the height as needed */
+    width: 300px; /* Adjust the width as needed */
+    padding: 10px; /* Add padding for better appearance */
+    font-size: 18px; /* Adjust the font size as needed */
+  }
+  
+  .add-entry-button {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 10px 20px; /* Adjust padding as needed */
+    font-size: 18px;
+    margin-top: 10px; /* Add margin to space it below the input */
+    cursor: pointer;
+  }
+  
+  .add-entry-button:hover {
+    background-color: grey; /* Change color on hover if desired */
+  }
+
+  .big-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .line {
+    border: 2px solid white;
+  }
+  .msg {
+    font-size: 1rem;
+    color: gray;
+}
+
+  @media only screen and (max-width: 800px) {
+    .big-container {
+      flex-direction: column;
+    }
+    #first.entry-col {
+      display: none;
+    }
+  }
