@@ -8,7 +8,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Set the height to 100% of the viewport height */
+  min-height: 100vh; /* Set the height to 100% of the viewport height */
   width: 100vw; /* Set the width to 100% of the viewport width */
   font-family: "Quicksand", sans-serif;
 }
@@ -76,7 +76,7 @@
     .big-container {
       flex-direction: column;
     }
-    #first.entry-col {
+    /* #first.entry-col {
       display: none;
-    }
+    } */
   }

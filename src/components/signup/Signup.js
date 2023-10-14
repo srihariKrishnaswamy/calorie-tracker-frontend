@@ -93,11 +93,9 @@ const Signup = (props) => {
   };
 
   return (
-    <div className="container">
       <div className="login-box">
         {!loading ? (
           <div>
-            <h2>Create an Account</h2>
             <form onSubmit={handleSubmit} className="login-form">
               <div className="columns">
                 <div className="column">
@@ -242,7 +240,6 @@ const Signup = (props) => {
           <ClipLoader color="#FFFFFF" loading={loading} size={50} />
         )}
       </div>
-    </div>
   );
 };
 

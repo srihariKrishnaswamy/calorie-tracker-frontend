@@ -9,6 +9,7 @@ import Navsection from './components/navsection/Navsection';
 import Settings from './components/settings/Settings';
 import Search from './components/search/Search';
 import jwt_decode from "jwt-decode";
+// import dotenv from 'dotenv';
 
 const API_URL = "https://caltracker-backend-988509e33b53.herokuapp.com";
 function App() {

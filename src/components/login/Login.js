@@ -68,7 +68,6 @@ const Login = (props) => {
   };
 
   return (
-    <div className="container">
       <div className="login-box">
         {!loading ? (
           <div>
@@ -110,7 +109,6 @@ const Login = (props) => {
           <ClipLoader color="#FFFFFF" loading={loading} size={50} />
         )}
       </div>
-    </div>
   );
 };
 

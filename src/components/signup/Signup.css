@@ -1,15 +1,12 @@
-.container {
+.login-box {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-}
-
-.login-box {
   background-color: black;
   border-radius: 20px;
-  padding: 30px;
+  padding: 10px;
+  min-height: 100vh;
+
 
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
@@ -18,14 +15,13 @@
   color: white;
   font-size: 24px;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   text-align: center;
 }
 
 .login-form {
   background-color: black;
   color: white;
-  padding: 20px;
   border-radius: 10px;
   font-size: 18px;
   display: flex;
