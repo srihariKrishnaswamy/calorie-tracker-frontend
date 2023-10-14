@@ -36,7 +36,6 @@ const AddEntry = (props) => {
       if (token === "") {
         props.signOut();
         navigate("/");
-        
       } else {
         try {
           const res = await axios.get(
@@ -67,21 +66,26 @@ const AddEntry = (props) => {
     var userStr = localStorage.getItem("user");
     var user = JSON.parse(userStr);
     const user_id = user.user_id;
-    const allEntries = await axios.post(API_URL + "/entries", {
-      food_name: food_name,
-      description: description,
-      num_calories: num_calories,
-      user_id: user_id,
-      headers: {
-        Authorization: `Bearer ${token}`,
+    const allEntries = await axios.post(
+      API_URL + "/entries",
+      {
+        food_name: food_name,
+        description: description,
+        num_calories: num_calories,
+        user_id: user_id,
       },
-    });
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     console.log(allEntries.data);
     setTodaysEntries(allEntries.data.reverse());
     set_food_name("");
     set_description("");
     set_num_calories("");
-    window.location.reload(); 
+    window.location.reload();
   };
   return (
     <div className="add-entry-container">

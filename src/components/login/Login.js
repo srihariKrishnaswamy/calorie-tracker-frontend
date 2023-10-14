@@ -41,6 +41,7 @@ const Login = (props) => {
       const accessToken = res.data.accessToken;
       localStorage.setItem("access_token", accessToken);
       try {
+        console.log(accessToken)
         const userRes = await axios.get(API_URL + `/users`, {
           headers: {
             Authorization: `Bearer ${accessToken}`,

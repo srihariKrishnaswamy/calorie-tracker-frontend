@@ -16,9 +16,8 @@ const Settings = (props) => {
     sexMessage: "",
     targetCalsMessage: "",
     weightMessage: "",
-    newPWMessage: ""
+    newPWMessage: "",
   });
-
 
   const updateUser = async () => {
     let token = localStorage.getItem("access_token");
@@ -27,23 +26,29 @@ const Settings = (props) => {
       props.signOut();
       navigate("/");
     } else if (props.user != null && sex !== "") {
-        const res = await axios.patch(API_URL + '/users', { // write a separate route for editing passwords
-            user_id: props.user.user_id,
-            sex: sex,
-            weight: weight,
-            target_calories: targetCalories,
-            headers: {
-                Authorization: `Bearer ${token}`,
-              },
-        })
-        // console.log(res.data);
-        setMessages({
-            sexMessage: "",
-            targetCalsMessage: "",
-            weightMessage: "",
-            newPWMessage: messages.newPWMessage
-        })
-        console.log("updated user")
+      const res = await axios.patch(
+        API_URL + "/users",
+        {
+          // write a separate route for editing passwords
+          user_id: props.user.user_id,
+          sex: sex,
+          weight: weight,
+          target_calories: targetCalories,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      // console.log(res.data);
+      setMessages({
+        sexMessage: "",
+        targetCalsMessage: "",
+        weightMessage: "",
+        newPWMessage: messages.newPWMessage,
+      });
+      console.log("updated user");
     }
   };
 
@@ -54,26 +59,32 @@ const Settings = (props) => {
       props.signOut();
       navigate("/");
     } else if (props.user != null && newPassword !== "") {
-        if (newPassword !== confirmPassword) {
-            return;
+      if (newPassword !== confirmPassword) {
+        return;
+      }
+      const res = await axios.patch(
+        API_URL + "/users/password",
+        {
+          // write a separate route for editing passwords
+          user_id: props.user.user_id,
+          password: newPassword,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-        const res = await axios.patch(API_URL + '/users/password', { // write a separate route for editing passwords
-            user_id: props.user.user_id,
-            password: newPassword,
-            headers: {
-                Authorization: `Bearer ${token}`,
-              },
-        })
-        // console.log(res.data);
-        setMessages({
-            sexMessage: messages.sexMessage,
-            targetCalsMessage: messages.targetCalsMessage,
-            weightMessage: messages.weightMessage,
-            newPWMessage: ""
-        })
-        setNewPassword("")
-        setConfirmPassword("")
-        console.log("updated password")
+      );
+      // console.log(res.data);
+      setMessages({
+        sexMessage: messages.sexMessage,
+        targetCalsMessage: messages.targetCalsMessage,
+        weightMessage: messages.weightMessage,
+        newPWMessage: "",
+      });
+      setNewPassword("");
+      setConfirmPassword("");
+      console.log("updated password");
     }
   };
 
@@ -81,24 +92,24 @@ const Settings = (props) => {
 
   useEffect(() => {
     const sexTimeout = setTimeout(() => {
-        updateUser();
-      }, 2000);
+      updateUser();
+    }, 2000);
 
-      const targetCalsTimeout = setTimeout(() => {
-        updateUser();
-      }, 2000);
+    const targetCalsTimeout = setTimeout(() => {
+      updateUser();
+    }, 2000);
 
-      const weightTimeout = setTimeout(() => {
-        updateUser();
-      }, 2000);
+    const weightTimeout = setTimeout(() => {
+      updateUser();
+    }, 2000);
 
-      const newPasswordTimeout = setTimeout(() => {
-        updatePassword();
-      }, 2000);
+    const newPasswordTimeout = setTimeout(() => {
+      updatePassword();
+    }, 2000);
 
-      const confirmPasswordTimeout = setTimeout(() => {
-        updatePassword();
-      }, 2000);
+    const confirmPasswordTimeout = setTimeout(() => {
+      updatePassword();
+    }, 2000);
 
     return () => {
       clearTimeout(sexTimeout);
@@ -110,24 +121,24 @@ const Settings = (props) => {
   }, [sex, targetCalories, weight, newPassword, confirmPassword]);
 
   useEffect(() => {
-    ( async () => {
-        const userStr = localStorage.getItem("user");
-        const localUser = JSON.parse(userStr);
-        let token = localStorage.getItem("access_token");
-        token = await props.updateAccessToken(token);
-        const res = await axios.get(API_URL + `/users?email=${localUser.email}`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-        const dbUser = res.data;
-        localStorage.setItem("user", JSON.stringify(dbUser));
-        props.setUser(dbUser);
-        setSex(dbUser.sex);
-        setWeight(dbUser.weight);
-        setTargetCalories(dbUser.target_calories);
-        console.log("gotten user from DB")
-    })()
+    (async () => {
+      const userStr = localStorage.getItem("user");
+      const localUser = JSON.parse(userStr);
+      let token = localStorage.getItem("access_token");
+      token = await props.updateAccessToken(token);
+      const res = await axios.get(API_URL + `/users?email=${localUser.email}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const dbUser = res.data;
+      localStorage.setItem("user", JSON.stringify(dbUser));
+      props.setUser(dbUser);
+      setSex(dbUser.sex);
+      setWeight(dbUser.weight);
+      setTargetCalories(dbUser.target_calories);
+      console.log("gotten user from DB");
+    })();
   }, []);
 
   return (
@@ -142,11 +153,10 @@ const Settings = (props) => {
           <select
             className="form-input"
             name="sex"
-            value={sex
-            }
+            value={sex}
             onChange={(e) => {
               setSex(e.target.value);
-              messages.sexMessage = "updating gender..."
+              messages.sexMessage = "updating gender...";
             }}
             required
           >
@@ -167,7 +177,7 @@ const Settings = (props) => {
             value={targetCalories}
             onChange={(e) => {
               setTargetCalories(e.target.value);
-              messages.targetCalsMessage = "updating target calories..."
+              messages.targetCalsMessage = "updating target calories...";
             }}
             required
           />
@@ -184,11 +194,11 @@ const Settings = (props) => {
             value={weight}
             onChange={(e) => {
               setWeight(e.target.value);
-              messages.weightMessage = "updating weight..."
+              messages.weightMessage = "updating weight...";
             }}
             required
           />
-         <p className="msg">{messages.weightMessage}</p>
+          <p className="msg">{messages.weightMessage}</p>
         </div>
         <div className="info">
           <label className="label">New Password:</label>
@@ -199,11 +209,11 @@ const Settings = (props) => {
             value={newPassword}
             onChange={(e) => {
               setNewPassword(e.target.value);
-              messages.newPWMessage = "make sure passwords match..."
+              messages.newPWMessage = "make sure passwords match...";
             }}
             required
           />
-            <p className="msg">{messages.newPWMessage}</p>
+          <p className="msg">{messages.newPWMessage}</p>
         </div>
         <div className="info">
           <label className="label">Confirm New Password:</label>
@@ -214,7 +224,7 @@ const Settings = (props) => {
             value={confirmPassword}
             onChange={(e) => {
               setConfirmPassword(e.target.value);
-              messages.newPWMessage = "make sure passwords match..."
+              messages.newPWMessage = "make sure passwords match...";
             }}
             required
           />
