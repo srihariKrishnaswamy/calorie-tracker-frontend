@@ -48,7 +48,7 @@ function Navsection(props) {
   }
   return (
     <Container className="nav">
-      <a href="/" className="site_title">{loggedInFN} Calorie Tracker</a>
+      <a className="site_title">{loggedInFN} Calorie Tracker</a>
       {!loggedIn ? (
         <ul className="options">
             <li>
