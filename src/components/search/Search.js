@@ -39,7 +39,7 @@ const Search = (props) => {
     <div>
       <PinnedUsers setUserSelected={setUserSelected} setTodaysTotal={setTodaysTotal} setData={setData} setCurrUser={setCurrUser} setUser={props.setUser} updateAccessToken={props.updateAccessToken} signOut={props.signOut}/>
       <div className="bar"></div>
-      <ShowSelectedTotals userSelected={userSelected} currUser={currUser} todaysTotal={todaysTotal} data={data}/>
+      <ShowSelectedTotals userSelected={userSelected} user={currUser} todaysTotal={todaysTotal} data={data}/>
     </div>
   )
 }

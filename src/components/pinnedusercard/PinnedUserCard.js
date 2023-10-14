@@ -58,7 +58,7 @@ const PinnedUserCard = (props) => {
             },
           }
         );
-        const list = res.data;
+        const list = res.data.reverse();
         var listToGraph = [];
         for (let i = 0; i < list.length; i++) {
           var obj = {
@@ -122,7 +122,7 @@ const PinnedUserCard = (props) => {
 }
   return (
     <div className="card-border">
-        <a className="desc-text" id="underline" onClick={selectUser}>{currUser.first_name} {currUser.last_name}</a>
+        <a className="desc-text" href="#specific" id="underline" onClick={selectUser}>{currUser.first_name} {currUser.last_name}</a>
         <p className="desc-text">{currUser.email}</p>
         <a className="desc-text" id="underline" onClick={deletePin}>delete pin</a>
     </div>

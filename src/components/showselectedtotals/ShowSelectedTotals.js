@@ -15,9 +15,9 @@ import {
 
 const ShowSelectedTotals = (props) => {
   return (
-    <div className="add-entry-container">
+    <div className="add-entry-container" id="specific">
       {
-        (props.userSelected) ? (
+        (props.userSelected && props.user !== null) ? (
             <div className="elements-container">
             <div className="percent">
               <p>{props.user.first_name} has eaten</p>

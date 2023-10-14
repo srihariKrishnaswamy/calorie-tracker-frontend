@@ -9,6 +9,7 @@
 .desc-text {
     font-size: 1rem;
     padding: 0;
+    color: white;
 }
 .scrollable-panel {
     max-height: 400px; /* Adjust the maximum height as needed */
