@@ -88,7 +88,7 @@ const AddEntry = (props) => {
     window.location.reload();
   };
   return (
-    <div className="add-entry-container">
+    <div className="entry-container">
       <Container className="big-container">
         <Col className="entry-col" id="first">
           {todaysEntries.length > 0 ? (

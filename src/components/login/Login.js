@@ -66,12 +66,15 @@ const Login = (props) => {
     setFormData({ email: "", password: "" });
     setLoading(false);
   };
+  const whiteText = {
+    color: 'white',
+  };
 
   return (
       <div className="login-box">
         {!loading ? (
           <div>
-            <h2>Login to CalTracker!</h2>
+            <h2 style={whiteText}>Login to KnowCal</h2>
             <form onSubmit={handleSubmit} className="login-form">
               <div className="field-content">
                 <label>Email:</label>

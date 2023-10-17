@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Nunito:wght@200&family=Quicksand:wght@500&display=swap");
 
 .main-container {
-  background-color: black;
+  /* background-color: black; */
+  background-image: url("https://wallpapercave.com/wp/wp9506510.jpg");
   color: white;
   display: flex;
   flex-direction: row;
@@ -31,11 +32,16 @@
     color: white;
     border: 1px solid white;
     border-radius: 10px;
+    
 }
 
 .msg {
     font-size: 1rem;
     color: gray;
+}
+
+.label {
+  text-shadow: 2px 2px black;
 }
 
 @media only screen and (max-width: 800px) {
