@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Nunito:wght@200&family=Quicksand:wght@500&display=swap");
+
 .login-box {
   display: flex;
   justify-content: center;
@@ -7,6 +9,7 @@
   padding: 10px;
   min-height: 100vh;
   background-image: url('https://images3.alphacoders.com/557/557573.jpg');
+  font-family: "Quicksand", sans-serif;
 }
 
 .login-box h2 {
