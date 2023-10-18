@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PinnedUsers from '../pinnedusers/PinnedUsers';
 import ShowSelectedTotals from '../showselectedtotals/ShowSelectedTotals';
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const API_URL = "https://caltracker-backend-988509e33b53.herokuapp.com";
 
@@ -34,7 +35,8 @@ const Search = (props) => {
       timezone: "",
     });
     const [data, setData] = useState([]);
-    const [userSelected, setUserSelected] = useState(false)
+    const [userSelected, setUserSelected] = useState(false);
+
   return (
     <div>
       <PinnedUsers setUserSelected={setUserSelected} setTodaysTotal={setTodaysTotal} setData={setData} setCurrUser={setCurrUser} setUser={props.setUser} updateAccessToken={props.updateAccessToken} signOut={props.signOut}/>

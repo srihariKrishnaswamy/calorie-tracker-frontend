@@ -6,6 +6,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Col";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import Trie from './Trie.js';
 import { useNavigate } from "react-router-dom";
 
 const API_URL = "https://caltracker-backend-988509e33b53.herokuapp.com";
@@ -14,6 +15,29 @@ const PinnedUsers = (props) => {
   const [message, setMessage] = useState("");
   const [newPinEmail, setNewPinEmail] = useState("");
   const navigate = useNavigate();
+  const [trie, setTrie] = useState({
+    trie: new Trie(),
+  });
+
+  const getAllUsers = async (email) => {
+    let token = localStorage.getItem("access_token");
+    token = await props.updateAccessToken(token);
+    const res = await axios.get(API_URL + "/users/all", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    var emails = []
+    for (let i = 0; i < res.data.length; i++) {
+      if (res.data[i].email !== email) {
+        emails.push(res.data[i].email)
+      }
+    }
+    trie.trie.insertList(emails);
+    trie.trie.deepPrint();
+  }
+
+
   const createList = () => {
     var entryList = [];
     var userStr = localStorage.getItem("user");
@@ -110,12 +134,15 @@ const PinnedUsers = (props) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("FULLY UPDATED USER: ");
+      await getAllUsers(res.data.email);
+      console.log("FULLY UPDATED USER & TRIE: ");
       console.log(res.data);
       localStorage.setItem("user", JSON.stringify(res.data));
       props.setUser(res.data);
     })();
   }, []);
+
+
   const addPin = async () => {
     var email = newPinEmail.trim().toLowerCase();
     console.log(email);
