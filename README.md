@@ -6,7 +6,8 @@ You can access the deployed version of the app here: https://calorie-tracker-fro
 
 You can also look at the backend (which I wrote with Node.js and Express.js) here: https://github.com/srihariKrishnaswamy/calorie_tracker_backend
 
-And if you're interested, the quick server I set up as a CRON script (it gets called by a CRON service I configured): https://github.com/srihariKrishnaswamy/calorie_tracker_cron
+And if you're interested, the quick server I set up as a CRON script (it gets called every 30 mins by a CRON service I configured): https://github.com/srihariKrishnaswamy/calorie_tracker_cron
+* I did it this way in order to avoid paying for deploying a CRON.
 
 ## Features
 
