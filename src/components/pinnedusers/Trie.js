@@ -1,7 +1,7 @@
 class TrieNode {
   constructor() {
     this.children = new Map();
-    this.isEndOfWord = false; 
+    this.id = -1; 
   }
 }
 
@@ -10,7 +10,9 @@ class Trie {
     this.root = new TrieNode();
   }
 
-  insert(word) {
+  insert(pair) {
+    let word = pair[0]
+    let id = pair[1]
     let node = this.root;
     for (const char of word) {
       if (!node.children.has(char)) {
@@ -18,7 +20,7 @@ class Trie {
       }
       node = node.children.get(char);
     }
-    node.isEndOfWord = true;
+    node.id = id;
   }
 
   insertList(wordList) {
@@ -35,8 +37,8 @@ class Trie {
       }
       node = node.children.get(char);
     }
-    console.log(node.isEndOfWord);
-    return node.isEndOfWord;
+    console.log(node.id)
+    return node.id;
   }
 
   startsWith(prefix) {
@@ -54,13 +56,14 @@ class Trie {
   }
 
   dfs(node, word, res) {
-    if (node.isEndOfWord === true) {
-      res.push(word);
+    if (node.id !== -1) {
+      res.push([word, node.id]);
     }
     for (const key of node.children.keys()) {
       this.dfs(node.children.get(key), word + key, res);
     }
   }
+
 
   delete(word) {
     var nodes = [];
@@ -74,11 +77,11 @@ class Trie {
       keys.push(word[i]);
       nodes.push(curr);
     }
-    curr.isEndOfWord = false;
+    curr.id = -1;
     while (nodes.length > 0) {
       curr = nodes.pop();
       var currKey = keys.pop();
-      if (curr.children.size > 0 || curr.isEndOfWord) {
+      if (curr.children.size > 0 || curr.id !== -1) {
         break;
       }
       if (curr.length === 0) {

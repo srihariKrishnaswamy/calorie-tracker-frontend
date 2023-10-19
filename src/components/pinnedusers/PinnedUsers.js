@@ -8,6 +8,7 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import Trie from './Trie.js';
 import { useNavigate } from "react-router-dom";
+import Panel from './Panel.js';
 
 const API_URL = "https://caltracker-backend-988509e33b53.herokuapp.com";
 
@@ -18,10 +19,23 @@ const PinnedUsers = (props) => {
   const [trie, setTrie] = useState({
     trie: new Trie(),
   });
+  const [options, setOptions] = useState([])
+
+  useEffect(() => {
+    console.log(options)
+  }, [options])
 
   const getAllUsers = async (email) => {
+    var userStr = localStorage.getItem("user");
+    var user = JSON.parse(userStr);
     let token = localStorage.getItem("access_token");
     token = await props.updateAccessToken(token);
+    var pinnedIds = [];
+    if (user.pinned_user_1_id !== null) pinnedIds.push(user.pinned_user_1_id);
+    if (user.pinned_user_2_id !== null) pinnedIds.push(user.pinned_user_2_id);
+    if (user.pinned_user_3_id !== null) pinnedIds.push(user.pinned_user_3_id);
+    if (user.pinned_user_4_id !== null) pinnedIds.push(user.pinned_user_4_id);
+    if (user.pinned_user_5_id !== null) pinnedIds.push(user.pinned_user_5_id);
     const res = await axios.get(API_URL + "/users/all", {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -29,10 +43,11 @@ const PinnedUsers = (props) => {
     })
     var emails = []
     for (let i = 0; i < res.data.length; i++) {
-      if (res.data[i].email !== email) {
-        emails.push(res.data[i].email)
+      if (res.data[i].email !== email && !pinnedIds.includes(res.data[i].user_id) && res.data[i].email !== user.email) {
+        emails.push([res.data[i].email, res.data[i].user_id])
       }
     }
+    console.log(emails)
     trie.trie.insertList(emails);
     trie.trie.deepPrint();
   }
@@ -54,6 +69,7 @@ const PinnedUsers = (props) => {
           id={user.pinned_user_1_id}
           setCurrUser={props.setCurrUser}
           updateAccessToken={props.updateAccessToken}
+          trie={trie.trie}
         />
       );
     if (user.pinned_user_2_id !== null)
@@ -68,6 +84,7 @@ const PinnedUsers = (props) => {
           id={user.pinned_user_2_id}
           setCurrUser={props.setCurrUser}
           updateAccessToken={props.updateAccessToken}
+          trie={trie.trie}
         />
       );
     if (user.pinned_user_3_id !== null)
@@ -82,6 +99,7 @@ const PinnedUsers = (props) => {
           id={user.pinned_user_3_id}
           setCurrUser={props.setCurrUser}
           updateAccessToken={props.updateAccessToken}
+          trie={trie.trie}
         />
       );
     if (user.pinned_user_4_id !== null)
@@ -96,6 +114,7 @@ const PinnedUsers = (props) => {
           id={user.pinned_user_4_id}
           setCurrUser={props.setCurrUser}
           updateAccessToken={props.updateAccessToken}
+          trie={trie.trie}
         />
       );
     if (user.pinned_user_5_id !== null)
@@ -110,6 +129,7 @@ const PinnedUsers = (props) => {
           id={user.pinned_user_5_id}
           setCurrUser={props.setCurrUser}
           updateAccessToken={props.updateAccessToken}
+          trie={trie.trie}
         />
       );
     return entryList;
@@ -249,17 +269,24 @@ const PinnedUsers = (props) => {
           },
         }
       );
+      trie.trie.delete(email);
       console.log("this is the new user from the patch");
       setMessage(`Pinned user ${email}!`);
       console.log(newUserRes.data);
-      // localStorage.setItem('user', newUserRes.data);
-      // props.setUser(newUserRes.data);
       window.location.reload();
     } catch (e) {
       alert("there was an internal error, try again soon");
       return;
     }
   };
+
+  const onUpdate = (val) => {
+    setNewPinEmail(val)
+    if (val.length > 2) {
+      setOptions(trie.trie.startsWith(val))
+    }
+  }
+
   return (
     <div className="add-entry-container">
       <Container className="big-container">
@@ -279,9 +306,10 @@ const PinnedUsers = (props) => {
             className="add-input"
             placeholder="Enter User Email"
             value={newPinEmail}
-            onChange={(e) => setNewPinEmail(e.target.value)}
+            onChange={(e) => onUpdate(e.target.value.toLowerCase())}
           />
-          <button className="add-entry-button" onClick={addPin}>
+          <Panel options={options} update={onUpdate}/>
+          <button className="add-entry-button" onClick={addPin} >
             Add Pin
           </button>
           <p className="msg">{message}</p>

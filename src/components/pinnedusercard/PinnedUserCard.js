@@ -170,6 +170,7 @@ const PinnedUserCard = (props) => {
       localStorage.setItem("user", JSON.stringify(res.data));
       window.location.reload();
       console.log("pin deleted");
+      props.trie.delete(currUser.email);
     } catch (e) {
       console.log(e);
     }
