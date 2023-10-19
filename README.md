@@ -1,70 +1,27 @@
-# Getting Started with Create React App
+# KnowCal!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a calorie tracker I made that anyone can use to learn about how they and their friends are hitting their calorie goals. Simply input your info to make an account, log the food you eat during the day, and get notified on how your friends are doing. 
 
-## Available Scripts
+You can access the deployed version of the app here: https://calorie-tracker-frontend.vercel.app/
 
-In the project directory, you can run:
+You can also look at the backend (which I wrote with Node.js and Express.js) here: https://github.com/srihariKrishnaswamy/calorie_tracker_backend
 
-### `npm start`
+And if you're interested, the quick server I set up as a CRON script (it gets called by a CRON service I configured): https://github.com/srihariKrishnaswamy/calorie_tracker_cron
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This app implements JWT auth token/refresh token practices, so all data is actually pretty secure. Passwords, as per convention are hashed, so not even I can get into anyones account!
 
-### `npm test`
+Users' target calories are calculated upon incpetion of their account, and can be updated by the user if they wish. Users can see graphs of how they have done in terms of meeting their calorie goals every day for the last week. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Users can also access other user's calorie data as a motivating factor. I implemented a trie in the frontend for a quick search for other users. Users can then pin whatever users they want and look at their calorie data. When users are pinned, the user that pins them also receives emails every night (via the Brevo API) regarding how their pins are doing.
 
-### `npm run build`
+Ultimatley, the spirit of firendly competition with peers is a great motivator, and that's what KnowCal looks to leverage!
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## How does it work/stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+frontend: React.js, deployed with Vercel
+backend: Node/Express.js, deployed with Heroku
+database: MySQL, deployed with Heroku also
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The database schema is available in the backend repo (https://github.com/srihariKrishnaswamy/calorie_tracker_backend), but essentially is architected so that it's easy to update user's daily totals since they are updated by the CRON running at midnight for each users' respective timezone.
